@@ -1,0 +1,26 @@
+{
+  "name": "mdi-react-builder",
+  "private": true,
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/levrik/mdi-react.git"
+  },
+  "author": "Levin Rickert <me@levrik.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/levrik/mdi-react/issues"
+  },
+  "homepage": "https://github.com/levrik/mdi-react",
+  "scripts": {
+    "clean": "rm -rf build && rm -rf publish/*.js",
+    "build": "git submodule update && npm run clean && mkdir build && node scripts/generate.js && babel build --out-dir publish"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.10.1",
+    "babel-plugin-transform-export-extensions": "^6.8.0",
+    "babel-plugin-transform-object-rest-spread": "^6.8.0",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.11.1"
+  }
+}
