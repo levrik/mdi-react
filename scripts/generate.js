@@ -4,9 +4,11 @@ const template =
 `import React from 'react';
 
 const $NAME$Icon = ({ viewBox = '0 0 24 24', children, ...props }) => {
-  <svg {...props} viewBox={viewBox}>
-    <path d="$PATH$" />
-  </svg>
+  return (
+    <svg {...props} viewBox={viewBox}>
+      <path d="$PATH$" />
+    </svg>
+  );
 };
 
 export default $NAME$Icon;
