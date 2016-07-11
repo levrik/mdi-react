@@ -19,11 +19,3 @@ import { FacebookBoxIcon } from 'mdi-react';
 
 The icons get the `mdi-icon` class attached for styling. You can also attach own additional classes.
 
-I recommend to use the following default style:
-
-```css
-.mdi-icon {
-  width: 24px;
-  height: 24px;
-}
-```
