@@ -7,9 +7,13 @@
 npm install mdi-react --save-dev
 ```
 
+*The version number of `mdi-react` is in sync with the original font.*
+
 ## Usage
 
-For example:
+Just search for an icon on [materialdesignicons.com](https://www.materialdesignicons.com) and look for its name.
+
+For example the icon named `facebook-box`:
 
 ```javascript
 import FacebookBoxIcon from 'mdi-react/FacebookBoxIcon';
@@ -17,13 +21,6 @@ import FacebookBoxIcon from 'mdi-react/FacebookBoxIcon';
 import { FacebookBoxIcon } from 'mdi-react';
 ```
 
-The icons get the `mdi-icon` class attached for styling. You can also attach own additional classes.
+The icons get a class named `mdi-icon` attached for styling. You can also attach own additional classes with the `className` property.
 
-I recommend to use the following default style:
-
-```css
-.mdi-icon {
-  width: 24px;
-  height: 24px;
-}
-```
+*Note that the second method from the example imports every icon from this package. Use the first method if your bundler does not support the removal of unused code.*
