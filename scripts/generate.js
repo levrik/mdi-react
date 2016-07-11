@@ -3,12 +3,12 @@ const fs = require('fs');
 const template =
 `import React from 'react';
 
-const $NAME$Icon = ({ viewBox = '0 0 24 24', className, children, ...props }) => {
+const $NAME$Icon = ({ width = 24, height = 24, viewBox = '0 0 24 24', className, children, ...props }) => {
   let classes = 'mdi-icon';
   if (className) classes += \` \${className}\`;
 
   return (
-    <svg {...props} className={classes} viewBox={viewBox}>
+    <svg {...props} width={width} height={height} viewBox={viewBox} className={classes}>
       <path d="$PATH$" />
     </svg>
   );
