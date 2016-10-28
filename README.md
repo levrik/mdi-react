@@ -29,9 +29,6 @@ const MyComponent = () => {
 
 The icons get a class named `mdi-icon` attached for styling. You can also attach own additional classes with the `className` property.
 
-*Note that the second method from the example imports every icon from this package. Use the first method if your bundler does not support the removal of unused code.*
-
-
 ## Typescript Definitions
 
 A typescript definition file will be created upon building.
