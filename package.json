@@ -14,7 +14,7 @@
   "homepage": "https://github.com/levrik/mdi-react",
   "scripts": {
     "clean": "rm -rf build && rm -rf publish/*.js",
-    "build": "git submodule update && npm run clean && mkdir build && node scripts/generate.js && babel build --out-dir publish"
+    "build": "git submodule update --init && npm run clean && mkdir build && node scripts/generate.js && babel build --out-dir publish"
   },
   "devDependencies": {
     "babel-cli": "^6.10.1",
