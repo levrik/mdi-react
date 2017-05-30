@@ -21,8 +21,10 @@ import AlertCircleIcon from 'mdi-react/AlertCircleIcon';
 
 const MyComponent = () => {
   return (
-    <AlertIcon />
-    <AlertCircleIcon className="some-class" />
+    <div>
+      <AlertIcon />
+      <AlertCircleIcon className="some-class" />
+    </div>
   );
 };
 ```
