@@ -28,3 +28,12 @@ const MyComponent = () => {
 ```
 
 The icons get a class named `mdi-icon` attached for styling. You can also attach own additional classes with the `className` property.
+
+## Typescript Definitions
+
+A typescript definition file will be created upon building.
+It will be located at:
+
+```
+/node_modules/mdi-react/typings.d.ts
+```
