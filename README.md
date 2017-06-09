@@ -11,7 +11,7 @@ npm install mdi-react --save-dev
 
 ## Usage
 
-Just search for an icon on [materialdesignicons.com](https://www.materialdesignicons.com) and look for its name.
+Just search for an icon on [materialdesignicons.com](https://materialdesignicons.com) and look for its name.
 
 For example the icons named `alert` and `alert-circle`:
 
