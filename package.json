@@ -13,14 +13,15 @@
   },
   "homepage": "https://github.com/levrik/mdi-react",
   "scripts": {
-    "clean": "rm -rf build && rm -rf publish/*.js",
-    "build": "git submodule update --init && npm run clean && mkdir build && node scripts/generate.js && babel build --out-dir publish"
+    "clean": "rimraf build && rimraf publish/*.js",
+    "build": "git submodule update --init && yarn run clean && mkdir build && node scripts/generate.js && babel build --out-dir publish"
   },
   "devDependencies": {
     "babel-cli": "^6.10.1",
     "babel-plugin-transform-export-extensions": "^6.8.0",
     "babel-plugin-transform-object-rest-spread": "^6.8.0",
     "babel-preset-es2015": "^6.9.0",
-    "babel-preset-react": "^6.11.1"
+    "babel-preset-react": "^6.11.1",
+    "rimraf": "^2.6.1"
   }
 }
