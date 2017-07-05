@@ -3,8 +3,10 @@
 
 ## Installation
 
-```
-npm install mdi-react --save-dev
+```bash
+npm install mdi-react
+# or if you use Yarn
+yarn add mdi-react
 ```
 
 *The version number of `mdi-react` is in sync with the original font.*
