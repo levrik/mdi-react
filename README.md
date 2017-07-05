@@ -13,7 +13,8 @@ yarn add mdi-react
 
 ## Usage
 
-Just search for an icon on [materialdesignicons.com](https://materialdesignicons.com) and look for its name.
+Just search for an icon on [materialdesignicons.com](https://materialdesignicons.com) and look for its name.  
+The name translates to PascalCase followed by the suffix `Icon` in `mdi-react`.
 
 For example the icons named `alert` and `alert-circle`:
 
