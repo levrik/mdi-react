@@ -1,13 +1,13 @@
 const fs = require('fs');
 const pathRegex = /\sd="(.*)"/;
 
-const svgFiles = fs.readdirSync(`${__dirname}/../mdi/icons/svg`);
+const svgFiles = fs.readdirSync(`${__dirname}/../mdi/svg`);
 for (let svgFile of svgFiles) {
   const name = svgFile.split(/-/g).map(part => {
     return part.charAt(0).toUpperCase() + part.slice(1);
   }).join('').slice(0, -4);
 
-  const content = fs.readFileSync(`${__dirname}/../mdi/icons/svg/${svgFile}`);
+  const content = fs.readFileSync(`${__dirname}/../mdi/svg/${svgFile}`);
   const pathMatches = pathRegex.exec(content);
   const path = pathMatches && pathMatches[1];
   // Skip on empty path
