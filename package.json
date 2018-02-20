@@ -13,8 +13,8 @@
   },
   "homepage": "https://github.com/levrik/mdi-react",
   "scripts": {
-    "clean": "rimraf build && rimraf publish/*.js",
-    "build": "git submodule update --init && yarn run clean && mkdir build && node scripts/generate.js && babel build --out-dir publish"
+    "clean": "rimraf build && rimraf publish/*.js && rimraf publish/*.d.ts",
+    "build": "git submodule update --init && yarn run clean && mkdir build && node scripts/generate.js && babel build --out-dir publish && cp build/typings.d.ts publish/typings.d.ts"
   },
   "devDependencies": {
     "babel-cli": "^6.10.1",

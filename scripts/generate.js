@@ -1,5 +1,10 @@
 const fs = require('fs');
+const Path = require('path');
 const pathRegex = /\sd="(.*)"/;
+
+const svgPath = Path.resolve(__dirname, '../mdi/svg');
+const buildPath = Path.resolve(__dirname, '../build');
+const publishPath = Path.resolve(__dirname, '../publish');
 
 const svgFiles = fs.readdirSync(`${__dirname}/../mdi/svg`);
 for (let svgFile of svgFiles) {
@@ -7,7 +12,7 @@ for (let svgFile of svgFiles) {
     return part.charAt(0).toUpperCase() + part.slice(1);
   }).join('').slice(0, -4);
 
-  const content = fs.readFileSync(`${__dirname}/../mdi/svg/${svgFile}`);
+  const content = fs.readFileSync(Path.join(svgPath, svgFile));
   const pathMatches = pathRegex.exec(content);
   const path = pathMatches && pathMatches[1];
   // Skip on empty path
@@ -30,5 +35,9 @@ const ${name}Icon = ({ width = 24, height = 24, viewBox = '0 0 24 24', className
 export default ${name}Icon;
 `;
 
-  fs.writeFileSync(`${__dirname}/../build/${name}Icon.js`, fileContent);
+  fs.writeFileSync(Path.join(buildPath, `${name}Icon.js`), fileContent);
+
+  break
 }
+
+fs.writeFileSync(Path.join(buildPath, 'typings.d.ts'), 'Hello World');
