@@ -2,26 +2,37 @@ const fs = require('fs');
 const Path = require('path');
 const pathRegex = /\sd="(.*)"/;
 
+// reduce string-copy-and-paste
 const svgPath = Path.resolve(__dirname, '../mdi/svg');
 const buildPath = Path.resolve(__dirname, '../build');
 const publishPath = Path.resolve(__dirname, '../publish');
 
+// container for the collected icons
+const icons = [];
+
 const svgFiles = fs.readdirSync(`${__dirname}/../mdi/svg`);
 for (let svgFile of svgFiles) {
-  const name = svgFile.split(/-/g).map(part => {
-    return part.charAt(0).toUpperCase() + part.slice(1);
-  }).join('').slice(0, -4);
+  // build name
+  const name = svgFile.split(/-/g)
+  .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+  .join('')
+  .slice(0, -4);
+
+  // only concat once
+  const nameIcon = `${name}Icon`;
+  icons.push(nameIcon)
 
   const content = fs.readFileSync(Path.join(svgPath, svgFile));
   const pathMatches = pathRegex.exec(content);
   const path = pathMatches && pathMatches[1];
+
   // Skip on empty path
   if (!path) continue;
 
   const fileContent =
 `import React from 'react';
 
-const ${name}Icon = ({ width = 24, height = 24, viewBox = '0 0 24 24', className, children, ...props }) => {
+const ${nameIcon} = ({ width = 24, height = 24, viewBox = '0 0 24 24', className, children, ...props }) => {
   let classes = 'mdi-icon';
   if (className) classes += \` \${className}\`;
 
@@ -32,12 +43,38 @@ const ${name}Icon = ({ width = 24, height = 24, viewBox = '0 0 24 24', className
   );
 };
 
-export default ${name}Icon;
+export default ${nameIcon};
 `;
+  fs.writeFileSync(Path.join(buildPath, `${nameIcon}.js`), fileContent);
 
-  fs.writeFileSync(Path.join(buildPath, `${name}Icon.js`), fileContent);
+  // create the [name].d.ts contents
+  const typeContent =
+`import { ComponentType } from "react";
+import { ReactMdiIconProps } from './typings'
 
-  break
+declare const ${nameIcon}: React.ComponentType<ReactMdiIconProps>;
+export default ${nameIcon};
+`;
+  fs.writeFileSync(Path.join(publishPath, `${nameIcon}.d.ts`), typeContent);
 }
 
-fs.writeFileSync(Path.join(buildPath, 'typings.d.ts'), 'Hello World');
+// create the global typings.d.ts
+const typingsContent =
+`import * as React from "react";
+
+export interface ReactMdiIconProps {
+  width?: number
+  height?: number
+  viewBox?: string
+  className?: string
+}
+
+${icons.map(nameIcon =>
+`declare const ${nameIcon}: React.ComponentType<ReactMdiIconProps>;
+`).join('')}
+`;
+fs.writeFileSync(Path.join(publishPath, 'typings.d.ts'), typingsContent);
+
+// Build the index.js file, before babel compile
+const indexContent = icons.map(nameIcon => `export ${nameIcon} from './${nameIcon}'`).join('\n')
+fs.writeFileSync(Path.join(buildPath, 'index.js'), indexContent);

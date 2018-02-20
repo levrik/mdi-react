@@ -14,7 +14,7 @@
   "homepage": "https://github.com/levrik/mdi-react",
   "scripts": {
     "clean": "rimraf build && rimraf publish/*.js && rimraf publish/*.d.ts",
-    "build": "git submodule update --init && yarn run clean && mkdir build && node scripts/generate.js && babel build --out-dir publish && cp build/typings.d.ts publish/typings.d.ts"
+    "build": "git submodule update --init && yarn run clean && mkdir build && node scripts/generate.js && babel build --out-dir publish"
   },
   "devDependencies": {
     "babel-cli": "^6.10.1",
@@ -23,5 +23,9 @@
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.11.1",
     "rimraf": "^2.6.1"
+  },
+  "dependencies": {
+    "@types/react": "^16.0.38",
+    "react": "^16.2.0"
   }
 }

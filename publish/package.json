@@ -25,5 +25,6 @@
   "homepage": "https://github.com/levrik/mdi-react",
   "peerDependencies": {
     "react": ">=0.14.0"
-  }
+  },
+  "typings": "./typings.d.ts"
 }
