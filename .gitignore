@@ -2,3 +2,4 @@ node_modules
 build
 publish/*
 !publish/package.json
+.DS_Store
