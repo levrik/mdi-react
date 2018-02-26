@@ -49,10 +49,10 @@ export default ${nameIcon};
 
   // create the [name].d.ts contents
   const typeContent =
-`import { ComponentType } from "react";
-import { ReactMdiIconProps } from './typings'
+`import { ReactMdiIconProps, ReactMdiIconComponentType } from './typings'
+export { ReactMdiIconProps, ReactMdiIconComponentType }
 
-declare const ${nameIcon}: React.ComponentType<ReactMdiIconProps>;
+declare const ${nameIcon}: ReactMdiIconComponentType;
 export default ${nameIcon};
 `;
   fs.writeFileSync(Path.join(publishPath, `${nameIcon}.d.ts`), typeContent);
@@ -60,7 +60,7 @@ export default ${nameIcon};
 
 // create the global typings.d.ts
 const typingsContent =
-`import * as React from "react";
+`import { ComponentType } from "react";
 
 export interface ReactMdiIconProps {
   width?: number
@@ -69,12 +69,8 @@ export interface ReactMdiIconProps {
   className?: string
 }
 
-${icons.map(nameIcon =>
-`declare const ${nameIcon}: React.ComponentType<ReactMdiIconProps>;
-`).join('')}
+export type ReactMdiIconComponentType = ComponentType<ReactMdiIconProps>
 `;
+
 fs.writeFileSync(Path.join(publishPath, 'typings.d.ts'), typingsContent);
 
-// Build the index.js file, before babel compile
-const indexContent = icons.map(nameIcon => `export ${nameIcon} from './${nameIcon}'`).join('\n')
-fs.writeFileSync(Path.join(buildPath, 'index.js'), indexContent);
