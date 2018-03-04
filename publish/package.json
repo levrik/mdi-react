@@ -9,8 +9,8 @@
     "design",
     "icons"
   ],
-  "main": "lib/index.cjs.js",
-  "module": "lib/index.es.js",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/levrik/mdi-react.git"

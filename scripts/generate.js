@@ -1,8 +1,10 @@
 const fs = require('fs');
-const pathRegex = /\sd="(.*)"/;
 
+const pathRegex = /\sd="(.*)"/;
 const svgFiles = fs.readdirSync(`${__dirname}/../mdi/svg`);
+
 let listOfComponents = [];
+
 for (let svgFile of svgFiles) {
   const name = svgFile.split(/-/g).map(part => {
     return part.charAt(0).toUpperCase() + part.slice(1);
@@ -14,16 +16,16 @@ for (let svgFile of svgFiles) {
   // Skip on empty path
   if (!path) continue;
 
-  const fileName = `${name}Icon.js`;
-  listOfComponents.push({
-    name,
-    fileName,
-  });
+  const component = {
+    name: name + 'Icon',
+    fileName: name + 'Icon.js'
+  };
+  listOfComponents.push(component);
 
   const fileContent =
 `import React from 'react';
 
-const ${name}Icon = ({ width = 24, height = 24, viewBox = '0 0 24 24', className, children, ...props }) => {
+const ${component.name} = ({ width = 24, height = 24, viewBox = '0 0 24 24', className, children, ...props }) => {
   let classes = 'mdi-icon';
   if (className) classes += \` \${className}\`;
 
@@ -34,10 +36,10 @@ const ${name}Icon = ({ width = 24, height = 24, viewBox = '0 0 24 24', className
   );
 };
 
-export default ${name}Icon;
+export default ${component.name};
 `;
 
-  fs.writeFileSync(`${__dirname}/../build/${fileName}`, fileContent);
+  fs.writeFileSync(`${__dirname}/../build/${component.fileName}`, fileContent);
 }
 
 const indexFileContent = listOfComponents

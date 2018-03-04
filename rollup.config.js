@@ -1,6 +1,5 @@
 import { readdirSync } from 'fs';
 import { resolve } from 'path';
-
 import babel from 'rollup-plugin-babel';
 
 const listOfEnties = readdirSync(resolve(__dirname, './build'));
@@ -11,20 +10,20 @@ export default listOfEnties.map(entry => {
     case 'index.js':
       output = [
         {
-          file: resolve(__dirname, './publish/lib/index.cjs.js'),
-          format: 'cjs',
+          file: resolve(__dirname, './publish/dist/index.cjs.js'),
+          format: 'cjs'
         },
         {
           file: resolve(__dirname, './publish/dist/index.es.js'),
-          format: 'es',
-        },
+          format: 'es'
+        }
       ];
       break;
 
     default:
       output = {
         file: resolve(__dirname, './publish', entry),
-        format: 'cjs',
+        format: 'cjs'
       };
       break;
   }
@@ -32,7 +31,19 @@ export default listOfEnties.map(entry => {
   return {
     input: resolve(__dirname, './build', entry),
     external: ['react'],
-    plugins: [babel()],
-    output,
+    plugins: [babel({
+      presets: [
+        [
+          'es2015',
+          { modules: false }
+        ],
+        'react'
+      ],
+      plugins: [
+        'transform-object-rest-spread',
+        'external-helpers'
+      ]
+    })],
+    output
   }
-})
+});

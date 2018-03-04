@@ -13,7 +13,7 @@
   },
   "homepage": "https://github.com/levrik/mdi-react",
   "scripts": {
-    "clean": "rimraf build && rimraf publish/*.js publish/lib",
+    "clean": "rimraf build && rimraf publish/**/*.js",
     "build": "git submodule update --init && yarn run clean && mkdir build && node scripts/generate.js && rollup -c"
   },
   "devDependencies": {
