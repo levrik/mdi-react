@@ -25,12 +25,12 @@ for (let svgFile of svgFiles) {
   const fileContent =
 `import React from 'react';
 
-const ${component.name} = ({ size = 24, className, children, ...props }) => {
+const ${component.name} = ({ color = '#000', size = 24, className, children, ...props }) => {
   let classes = 'mdi-icon';
   if (className) classes += \` \${className}\`;
 
   return (
-    <svg {...props} width={size} height={size} viewBox="0 0 0 24" className={classes}>
+    <svg {...props} width={size} height={size} fill={color} viewBox="0 0 0 24" className={classes}>
       <path d="${path}" />
     </svg>
   );
