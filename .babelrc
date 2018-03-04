@@ -1,10 +1,15 @@
 {
   "presets": [
-    "es2015",
+    [
+    	"es2015",
+    	{
+    		"modules": false
+    	}
+    ],
     "react"
   ],
   "plugins": [
     "transform-object-rest-spread",
-    "transform-export-extensions"
+    "external-helpers"
   ]
 }
