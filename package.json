@@ -14,7 +14,7 @@
   "homepage": "https://github.com/levrik/mdi-react",
   "scripts": {
     "clean": "rimraf build && rimraf publish/**/*.js",
-    "build": "git submodule update --init && yarn run clean && mkdir build && node scripts/generate.js && rollup -c"
+    "build": "git submodule update --init && yarn run clean && mkdir build && node scripts/generate.js && rollup -c && cpr README.md publish/README.md -o && cpr LICENSE publish/LICENSE -o"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -22,6 +22,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.8.0",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.11.1",
+    "cpr": "^3.0.1",
     "rimraf": "^2.6.1",
     "rollup": "^0.56.3",
     "rollup-plugin-babel": "^3.0.3"
