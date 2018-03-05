@@ -1,6 +1,6 @@
 {
-  "name": "mdi-react",
-  "version": "2.1.19",
+  "name": "@levrik/mdi-react",
+  "version": "3.0.0-2.1.19",
   "description": "Material Design Icons for React",
   "keywords": [
     "mdi",
@@ -26,5 +26,6 @@
   "homepage": "https://github.com/levrik/mdi-react",
   "peerDependencies": {
     "react": ">=0.14.0"
-  }
+  },
+  "typings": "./typings.d.ts"
 }

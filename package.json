@@ -13,7 +13,7 @@
   },
   "homepage": "https://github.com/levrik/mdi-react",
   "scripts": {
-    "clean": "rimraf build && rimraf publish/**/*.js",
+    "clean": "rimraf build && rimraf publish/**/*.js && rimraf publish/**/*.d.ts",
     "build": "git submodule update --init && yarn run clean && mkdir build && node scripts/generate.js && rollup -c && cpr README.md publish/README.md -o && cpr LICENSE publish/LICENSE -o"
   },
   "devDependencies": {
@@ -26,5 +26,9 @@
     "rimraf": "^2.6.1",
     "rollup": "^0.56.3",
     "rollup-plugin-babel": "^3.0.3"
+  },
+  "peerDependencies": {
+    "@types/react": "^16.0.38",
+    "react": "^16.2.0"
   }
 }
