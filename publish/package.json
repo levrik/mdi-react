@@ -9,13 +9,14 @@
     "design",
     "icons"
   ],
-  "main": "index.js",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/levrik/mdi-react.git"
   },
   "scripts": {
-    "prepublish": "cd .. && yarn build && cd publish && cp ../README.md README.md && cp ../LICENSE LICENSE"
+    "prepublish": "cd .. && yarn build"
   },
   "author": "Levin Rickert <me@levrik.io>",
   "license": "(MIT AND OFL-1.1)",
