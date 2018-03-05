@@ -74,9 +74,7 @@ export interface MdiReactIconProps {
 }
 export type MdiReactIconComponentType = ComponentType<MdiReactIconProps>;
 
-${components.map(component =>
-`declare const ${component.name}: MdiReactIconComponentType;
-`).join('')}
+${components.map(component => `declare const ${component.name}: MdiReactIconComponentType;`).join('\n')}
 `;
 
 fs.writeFileSync(path.join(publishPath, 'dist', 'typings.d.ts'), typingsContent);
