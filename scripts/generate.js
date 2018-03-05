@@ -39,7 +39,7 @@ const ${component.name} = ({ color = '#000', size = 24, className, children, ...
   if (className) classes += \` \${className}\`;
 
   return (
-    <svg {...props} width={size} height={size} fill={color} viewBox="0 0 0 24" className={classes}>
+    <svg {...props} width={size} height={size} fill={color} viewBox="0 0 24 24" className={classes}>
       <path d="${svgPath}" />
     </svg>
   );
