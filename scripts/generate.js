@@ -10,8 +10,6 @@ const publishPath = Path.resolve(__dirname, '../publish');
 // container for the collected components
 const components = [];
 
-let x = 5
-
 const svgFiles = fs.readdirSync(`${__dirname}/../mdi/svg`);
 for (let svgFile of svgFiles) {
   // build name
@@ -19,8 +17,6 @@ for (let svgFile of svgFiles) {
   .map(part => part.charAt(0).toUpperCase() + part.slice(1))
   .join('')
   .slice(0, -4);
-
-  if(!x--) break
 
   const content = fs.readFileSync(Path.join(svgPath, svgFile));
   const pathMatches = pathRegex.exec(content);
