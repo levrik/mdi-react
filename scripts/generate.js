@@ -69,8 +69,15 @@ export interface ReactMdiIconProps {
   className?: string
 }
 
-export type ReactMdiIconComponentType = ComponentType<ReactMdiIconProps>
+export type ReactMdiIconComponentType = ComponentType<ReactMdiIconProps>;
+
+${icons.map(nameIcon =>
+`declare const ${nameIcon}: ReactMdiIconComponentType;
+`).join('')}
 `;
 
 fs.writeFileSync(Path.join(publishPath, 'typings.d.ts'), typingsContent);
 
+// Build the index.js file, before babel compile
+const indexContent = icons.map(nameIcon => `export ${nameIcon} from './${nameIcon}'`).join('\n')
+fs.writeFileSync(Path.join(buildPath, 'index.js'), indexContent);
