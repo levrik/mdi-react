@@ -67,7 +67,7 @@ const typingsContent =
 
 export interface MdiReactIconProps {
   color?: string
-  size?: number
+  size?: number | string
   className?: string
   // should not have any children
   children?: never
