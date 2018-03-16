@@ -1,4 +1,4 @@
-# mdi-react [![npm package](https://img.shields.io/npm/v/mdi-react.svg?style=flat-square)](https://npmjs.org/package/mdi-react) [![Material Design Icons version](https://img.shields.io/badge/mdi-v2.1.19-blue.svg?style=flat-square)](https://materialdesignicons.com)
+# mdi-react [![npm package](https://img.shields.io/npm/v/mdi-react.svg?style=flat-square)](https://npmjs.org/package/mdi-react) [![Material Design Icons version](https://img.shields.io/badge/mdi-v2.1.99-blue.svg?style=flat-square)](https://materialdesignicons.com)
 [Material Design Icons](https://materialdesignicons.com) for React packaged as single components
 
 ## Installation
