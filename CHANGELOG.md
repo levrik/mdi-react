@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.1.0
+
+This version ships with **mdi 2.2.43**
+
 ## 3.0.0
 
 This version ships with **mdi 2.1.99**
