@@ -1,12 +1,12 @@
 # Changelog
 
-## 3.1.0
+This page only documents changes to the library itself, **not** the icons. Please refer to the [mdi history](https://materialdesignicons.com/history) for that.
 
-This version ships with **mdi 2.2.43**
+## 3.1.0 [![Material Design Icons version](https://img.shields.io/badge/mdi-v2.2.43-blue.svg?style=flat-square)](https://materialdesignicons.com)
 
-## 3.0.0
+_No changes_
 
-This version ships with **mdi 2.1.99**
+## 3.0.0 [![Material Design Icons version](https://img.shields.io/badge/mdi-v2.1.99-blue.svg?style=flat-square)](https://materialdesignicons.com)
 
 ### Breaking changes
 
