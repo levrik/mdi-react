@@ -1,86 +1,128 @@
 const fs = require('fs');
+const { sync: mkdirp } = require('mkdirp');
 const path = require('path');
+const rollup = require('rollup');
+const babel = require('rollup-plugin-babel');
 
 const svgPathRegex = /\sd="(.*)"/;
-// reduce string-copy-and-paste
-const svgFilesPath = path.resolve(__dirname, '../mdi/svg');
-const buildPath = path.resolve(__dirname, '../build');
-const publishPath = path.resolve(__dirname, '../publish');
 
-// container for the collected components
-const components = [];
-
-const svgFiles = fs.readdirSync(svgFilesPath);
-for (let svgFile of svgFiles) {
-  // build name
-  const name = svgFile.split(/-/g).map(part => {
-    return part.charAt(0).toUpperCase() + part.slice(1);
-  }).join('').slice(0, -4);
-
-  const content = fs.readFileSync(path.join(svgFilesPath, svgFile));
-  const svgPathMatches = svgPathRegex.exec(content);
-  const svgPath = svgPathMatches && svgPathMatches[1];
-  // Skip on empty svgPath
-  if (!svgPath) continue;
-
-  // only concat once
-  const component = {
-    name: name + 'Icon',
-    fileName: name + 'Icon.js',
-    definition: name + 'Icon.d.ts'
+function getRollupInputConfig(target) {
+  return {
+    external: [target],
+    plugins: [
+      babel({
+        presets: [
+          ['es2015', { modules: false }],
+          target
+        ],
+        plugins: [
+          'transform-object-rest-spread',
+          'external-helpers'
+        ]
+      })
+    ]
   };
-  components.push(component);
-
-  const fileContent =
-`import React from 'react';
-
-const ${component.name} = ({ color = '#000', size = 24, className, children, ...props }) => {
-  let classes = 'mdi-icon';
-  if (className) classes += \` \${className}\`;
-
-  return (
-    <svg {...props} width={size} height={size} fill={color} viewBox="0 0 24 24" className={classes}>
-      <path d="${svgPath}" />
-    </svg>
-  );
-};
-
-export default ${component.name};
-`;
-
-  fs.writeFileSync(path.join(buildPath, component.fileName), fileContent);
-
-  // create the [name].d.ts contents
-  const definitionContent =
-`import { MdiReactIconProps, MdiReactIconComponentType } from './dist/typings';
-
-declare const ${component.name}: MdiReactIconComponentType;
-export default ${component.name};
-export { MdiReactIconProps, MdiReactIconComponentType };
-`;
-  fs.writeFileSync(path.join(publishPath, component.definition), definitionContent);
 }
 
-// create the global typings.d.ts
-const typingsContent =
-`import { ComponentType } from 'react';
+function collectComponents(svgFilesPath) {
+  const svgFiles = fs.readdirSync(svgFilesPath);
+  return svgFiles.map(svgFile => {
+    // build name
+    const name = svgFile.split(/-/g).map(part => {
+      return part.charAt(0).toUpperCase() + part.slice(1);
+    }).join('').slice(0, -4);
 
-export interface MdiReactIconProps {
-  color?: string
-  size?: number | string
-  className?: string
-  // should not have any children
-  children?: never
+    const content = fs.readFileSync(path.join(svgFilesPath, svgFile));
+    const svgPathMatches = svgPathRegex.exec(content);
+    const svgPath = svgPathMatches && svgPathMatches[1];
+    // Skip on empty svgPath
+    if (!svgPath) return null;
+
+    // only concat once
+    return component = {
+      name: name + 'Icon',
+      fileName: name + 'Icon.js',
+      defFileName: name + 'Icon.d.ts',
+      svgPath
+    };
+  }).filter(Boolean);
 }
-export type MdiReactIconComponentType = ComponentType<MdiReactIconProps>;
 
-${components.map(component => `declare const ${component.name}: MdiReactIconComponentType;`).join('\n')}
-`;
+async function generate(target, jsCb, tsCb, tsAllCb) {
+  const basePath = path.resolve(__dirname, '..');
+  const svgFilesPath = path.resolve(basePath, 'mdi/svg');
+  const buildPath = path.resolve(basePath, 'build');
+  mkdirp(buildPath);
+  const publishPath = path.resolve(basePath, 'publish-' + target);
+  mkdirp(publishPath);
+  const distPath = path.resolve(publishPath, 'dist');
+  mkdirp(distPath);
 
-fs.writeFileSync(path.join(publishPath, 'dist', 'typings.d.ts'), typingsContent);
+  console.log('Collecting icons...');
+  const components = collectComponents(svgFilesPath);
+  console.log('Generating components...');
+  const pathsToUnlink = [];
+  for (const component of components) {
+    console.log('Generating ' + component.name + '...');
 
-// Build the index.js file, before rollup compile
-const indexFileContent = components
-  .map(component => `export { default as ${component.name} } from './${component.fileName}';`)
-  .join('\n');
-fs.writeFileSync(path.join(buildPath, 'index.js'), indexFileContent);
+    const fileContent = jsCb(component);
+    const inputPath = path.resolve(buildPath, component.fileName);
+    const outputPath = path.resolve(publishPath, component.fileName);
+
+    fs.writeFileSync(inputPath, fileContent);
+
+    const bundle = await rollup.rollup({
+      input: inputPath,
+      ...getRollupInputConfig(target)
+    });
+
+    await bundle.write({
+      file: outputPath,
+      format: 'cjs'
+    });
+
+    pathsToUnlink.push(inputPath);
+
+    const definitionContent = tsCb(component);
+    fs.writeFileSync(path.join(publishPath, component.defFileName), definitionContent);
+  }
+
+  console.log('Generating typings...');
+  // create the global typings.d.ts
+  const typingsContent = tsAllCb(components);
+  fs.writeFileSync(path.resolve(distPath, 'typings.d.ts'), typingsContent);
+
+  console.log('Generating index...');
+  // create index.es.js and index.cjs.js
+  const indexFileContent = components
+    .map(component => `export { default as ${component.name} } from './${component.fileName}';`)
+    .join('\n');
+
+  const indexInputPath = path.resolve(buildPath, 'index.js');
+
+  fs.writeFileSync(indexInputPath, indexFileContent);
+
+  const bundle = await rollup.rollup({
+    input: indexInputPath,
+    ...getRollupInputConfig(target)
+  });
+
+  await Promise.all([
+    bundle.write({
+      file: path.resolve(distPath, 'index.cjs.js'),
+      format: 'cjs'
+    }),
+    bundle.write({
+      file: path.resolve(distPath, 'index.es.js'),
+      format: 'es'
+    })
+  ]);
+
+  // clean up
+  fs.unlinkSync(indexInputPath);
+  for (const pathToUnlink of pathsToUnlink) {
+    fs.unlinkSync(pathToUnlink);
+  }
+}
+
+module.exports = generate;

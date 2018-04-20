@@ -3,6 +3,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 build
-publish/*
-!publish/package.json
+publish-*/*
+!publish-*/package.json
 .DS_Store

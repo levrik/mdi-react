@@ -1,5 +1,5 @@
 # mdi-react [![npm package](https://img.shields.io/npm/v/mdi-react.svg?style=flat-square)](https://npmjs.org/package/mdi-react) [![Material Design Icons version](https://img.shields.io/badge/mdi-v2.3.54-blue.svg?style=flat-square)](https://materialdesignicons.com)
-[Material Design Icons](https://materialdesignicons.com) for React packaged as single components
+[Material Design Icons](https://materialdesignicons.com) for React/Preact packaged as single components
 
 **New v3.2.0 released: See [CHANGELOG.md](./CHANGELOG.md)**
 
@@ -10,6 +10,11 @@ npm install mdi-react
 # or if you use Yarn
 yarn add mdi-react
 ```
+
+<!-- Preact intro -->
+Support for [Preact](https://preactjs.com/) is available via the `mdi-preact` package.  
+The `mdi-preact` package supports `class` as alternative to `className`.
+<!-- Preact intro -->
 
 ## Usage
 
@@ -29,14 +34,14 @@ const MyComponent = () => {
     <div>
       {/* The default color is #000 */}
       <AlertIcon color="#fff" />
-      {/* The default size is 24px */}
+      {/* The default size is 24 */}
       <AlertCircleIcon className="some-class" size={16} />
     </div>
   );
 };
 ```
 
-You can also add other default styling via the `mdi-react` class.
+You can also add default styling via the `mdi-icon` class.
 
 ```css
 .mdi-icon {

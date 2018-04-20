@@ -1,0 +1,31 @@
+{
+  "name": "mdi-react",
+  "version": "3.2.0",
+  "description": "Material Design Icons for React",
+  "keywords": [
+    "mdi",
+    "react",
+    "material",
+    "design",
+    "icons"
+  ],
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/levrik/mdi-react.git"
+  },
+  "scripts": {
+    "prepublish": "cd .. && yarn build-react"
+  },
+  "author": "Levin Rickert <me@levrik.io>",
+  "license": "(MIT AND OFL-1.1)",
+  "bugs": {
+    "url": "https://github.com/levrik/mdi-react/issues"
+  },
+  "homepage": "https://github.com/levrik/mdi-react",
+  "peerDependencies": {
+    "react": ">=0.14.0"
+  },
+  "typings": "./dist/typings.d.ts"
+}
