@@ -1,7 +1,7 @@
 {
   "name": "mdi-react-builder",
   "private": true,
-  "version": "1.2.0",
+  "version": "2.0.0",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/levrik/mdi-react.git"
@@ -13,20 +13,29 @@
   },
   "homepage": "https://github.com/levrik/mdi-react",
   "scripts": {
-    "clean": "rimraf build && rimraf publish/**/*.js && rimraf publish/**/*.d.ts",
-    "build": "git submodule update --init && yarn run clean && mkdir build && node scripts/generate.js && rollup -c && cpr README.md publish/README.md -o && cpr LICENSE publish/LICENSE -o"
+    "clean-react": "rimraf publish-react/**/*.js publish-react/**/*.d.ts",
+    "clean-preact": "rimraf publish-preact/**/*.js publish-preact/**/*.d.ts",
+    "clean": "yarn clean-react && yarn clean-preact",
+    "build-react": "git submodule update --init && yarn run clean-react && node scripts/generate-react.js && cpr README.md publish-react/README.md -o && cpr CHANGELOG.md publish-react/CHANGELOG.md -o && cpr LICENSE publish-react/LICENSE -o",
+    "build-preact": "git submodule update --init && yarn run clean-preact && node scripts/generate-preact.js && node scripts/generate-preact-readme.js > publish-preact/README.md && cpr CHANGELOG.md publish-preact/CHANGELOG.md -o && cpr LICENSE publish-preact/LICENSE -o"
   },
   "devDependencies": {
-    "@types/react": "^16.0.40",
+    "@types/node": "^9.6.6",
+    "@types/react": "^16.0.0",
+    "cpr": "^3.0.1",
+    "rimraf": "^2.6.1"
+  },
+  "dependencies": {
     "babel-core": "^6.26.0",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-transform-object-rest-spread": "^6.8.0",
     "babel-preset-es2015": "^6.9.0",
+    "babel-preset-preact": "^1.1.0",
     "babel-preset-react": "^6.11.1",
-    "cpr": "^3.0.1",
-    "react": "^16.2.0",
-    "rimraf": "^2.6.1",
-    "rollup": "^0.56.3",
+    "mkdirp": "^0.5.1",
+    "preact": "^8.2.7",
+    "react": "^16.0.0",
+    "rollup": "^0.58.0",
     "rollup-plugin-babel": "^3.0.3"
   }
 }
