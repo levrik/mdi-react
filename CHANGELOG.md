@@ -7,6 +7,7 @@ This page only documents changes to the library itself, **not** the icons. Pleas
 ### New features
 
 - Support for Preact via `mdi-preact` package.
+- Support import of aliases.
 
 ## 3.2.0 [![Material Design Icons version](https://img.shields.io/badge/mdi-v2.3.54-blue.svg?style=flat-square)](https://materialdesignicons.com)
 
