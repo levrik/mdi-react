@@ -2,12 +2,12 @@
 
 This page only documents changes to the library itself, **not** the icons. Please refer to the [mdi history](https://materialdesignicons.com/history) for that.
 
-## Unreleased [![Material Design Icons version](https://img.shields.io/badge/mdi-v2.3.54-blue.svg?style=flat-square)](https://materialdesignicons.com)
+## 3.3.0 [![Material Design Icons version](https://img.shields.io/badge/mdi-v2.3.54-blue.svg?style=flat-square)](https://materialdesignicons.com)
 
 ### New features
 
-- Support for Preact via `mdi-preact` package.
-- Support import of aliases.
+- [`7ee6784`](https://github.com/levrik/mdi-react/commit/7ee678454dedf1dc3f553b023dfebc89211f84bd) Support for Preact via `mdi-preact` package. Thanks to [@GusRuss89](https://github.com/GusRuss89) for his initial work.
+- [`49d94b3`](https://github.com/levrik/mdi-react/commit/49d94b3c09ffa42f43554b714a8696d25ebd9fe5) Support import of aliases.
 
 ## 3.2.0 [![Material Design Icons version](https://img.shields.io/badge/mdi-v2.3.54-blue.svg?style=flat-square)](https://materialdesignicons.com)
 
