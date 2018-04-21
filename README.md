@@ -19,7 +19,8 @@ The `mdi-preact` package supports `class` as alternative to `className`.
 ## Usage
 
 Just search for an icon on [materialdesignicons.com](https://materialdesignicons.com) and look for its name.  
-The name translates to PascalCase followed by the suffix `Icon` in `mdi-react`.
+The name translates to PascalCase followed by the suffix `Icon` in `mdi-react`.  
+Also it's possible to import with an alias. You can find them on the detail page of the respective icon.
 
 For example the icons named `alert` and `alert-circle`:
 
