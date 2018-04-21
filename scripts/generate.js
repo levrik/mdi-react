@@ -3,8 +3,10 @@ const { sync: mkdirp } = require('mkdirp');
 const path = require('path');
 const rollup = require('rollup');
 const babel = require('rollup-plugin-babel');
+const meta = require('../mdi/meta.json');
 
 const svgPathRegex = /\sd="(.*)"/;
+const startsWithNumberRegex = /^\d/;
 
 function getRollupInputConfig(target) {
   return {
@@ -24,28 +26,93 @@ function getRollupInputConfig(target) {
   };
 }
 
+function normalizeName(name) {
+  return name.split(/[ -]/g).map(part => {
+    return part.charAt(0).toUpperCase() + part.slice(1);
+  }).join('') + 'Icon';
+}
+
 function collectComponents(svgFilesPath) {
   const svgFiles = fs.readdirSync(svgFilesPath);
-  return svgFiles.map(svgFile => {
-    // build name
-    const name = svgFile.split(/-/g).map(part => {
-      return part.charAt(0).toUpperCase() + part.slice(1);
-    }).join('').slice(0, -4);
+
+  const icons = [];
+  for (const svgFile of svgFiles) {
+    const origName = svgFile.slice(0, -4);
+    const name = normalizeName(origName);
 
     const content = fs.readFileSync(path.join(svgFilesPath, svgFile));
     const svgPathMatches = svgPathRegex.exec(content);
     const svgPath = svgPathMatches && svgPathMatches[1];
-    // Skip on empty svgPath
-    if (!svgPath) return null;
+    // skip on empty svgPath
+    if (!svgPath) throw new Error('Empty SVG path');
 
-    // only concat once
-    return component = {
-      name: name + 'Icon',
-      fileName: name + 'Icon.js',
-      defFileName: name + 'Icon.d.ts',
+    const icon = {
+      name: name,
+      aliases: [],
+      fileName: name + '.js',
+      defFileName: name + '.d.ts',
       svgPath
     };
-  }).filter(Boolean);
+
+    const iconMeta = meta.find(entry => entry.name === origName);
+    if (iconMeta) {
+      icon.aliases = iconMeta.aliases;
+    }
+
+    icons.push(icon);
+  }
+
+  const aliases = [];
+  const removeAliases = [];
+  for (const icon of icons) {
+    for (const alias of icon.aliases) {
+      const normalizedAlias = normalizeName(alias);
+
+      // if the alias starts with a number, ignore it since JavaScript
+      // doesn't support variable names starting with a number
+      if (startsWithNumberRegex.test(normalizedAlias)) {
+        continue;
+      }
+
+      // check if alias duplicates top-level icon name and ignore
+      if (icons.find(icon => icon.name.toLowerCase() === normalizedAlias.toLowerCase())) {
+        continue;
+      }
+
+      // check if alias itself is duplicated
+      const duplicateAlias = aliases.find(alias2 => alias2.name.toLowerCase() === normalizedAlias.toLowerCase());
+      if (duplicateAlias) {
+        // check if duplicate alias is on same icon
+        // if not note for removal from final list
+        if (duplicateAlias.aliasFor !== icon.name) {
+          console.warn(`Duplicate alias ${normalizedAlias} (${icon.name}, ${duplicateAlias.aliasFor})`);
+          removeAliases.push(duplicateAlias.name);
+          continue;
+        }
+
+        continue;
+      }
+
+      aliases.push({
+        name: normalizedAlias,
+        aliasFor: icon.name,
+        fileName: normalizedAlias + '.js',
+        defFileName: normalizedAlias + '.d.ts',
+        svgPath: icon.svgPath
+      });
+    }
+
+    // removed no longer required aliases array
+    delete icon.aliases;
+  }
+
+  // clean up remaining alias duplicates
+  for (const aliasName of removeAliases) {
+    const index = aliases.find(alias => aliasName === alias);
+    aliases.splice(index, 1);
+  }
+
+  return [...icons, ...aliases];
 }
 
 async function generate(target, jsCb, tsCb, tsAllCb) {
@@ -58,12 +125,16 @@ async function generate(target, jsCb, tsCb, tsAllCb) {
   const distPath = path.resolve(publishPath, 'dist');
   mkdirp(distPath);
 
-  console.log('Collecting icons...');
+  console.log('Collecting components...');
   const components = collectComponents(svgFilesPath);
   console.log('Generating components...');
   const pathsToUnlink = [];
   for (const component of components) {
-    console.log('Generating ' + component.name + '...');
+    if (!component.aliasFor) {
+      console.log('Generating ' + component.name + '...');
+    } else {
+      console.log('Generating alias ' + component.name + '...');
+    }
 
     const fileContent = jsCb(component);
     const inputPath = path.resolve(buildPath, component.fileName);
@@ -81,7 +152,10 @@ async function generate(target, jsCb, tsCb, tsAllCb) {
       format: 'cjs'
     });
 
-    pathsToUnlink.push(inputPath);
+    // remember paths to unlink later
+    if (!pathsToUnlink.includes(inputPath)) {
+      pathsToUnlink.push(inputPath);
+    }
 
     const definitionContent = tsCb(component);
     fs.writeFileSync(path.join(publishPath, component.defFileName), definitionContent);
@@ -95,7 +169,7 @@ async function generate(target, jsCb, tsCb, tsAllCb) {
   console.log('Generating index...');
   // create index.es.js and index.cjs.js
   const indexFileContent = components
-    .map(component => `export { default as ${component.name} } from './${component.fileName}';`)
+    .map(component => `export { default as ${component.name} } from './${component.aliasFor || component.name}';`)
     .join('\n');
 
   const indexInputPath = path.resolve(buildPath, 'index.js');
