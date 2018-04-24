@@ -19,8 +19,10 @@
     "build-react": "yarn run clean-react && node scripts/generate-react.js && cpr README.md publish-react/README.md -o && cpr CHANGELOG.md publish-react/CHANGELOG.md -o && cpr LICENSE publish-react/LICENSE -o",
     "build-preact": "yarn run clean-preact && node scripts/generate-preact.js && node scripts/generate-preact-readme.js > publish-preact/README.md && cpr CHANGELOG.md publish-preact/CHANGELOG.md -o && cpr LICENSE publish-preact/LICENSE -o"
   },
+  "dependencies": {
+    "@mdi/svg": "2.3.54"
+  },
   "devDependencies": {
-    "@mdi/svg": "2.3.54",
     "@types/node": "^9.6.6",
     "@types/react": "^16.0.0",
     "babel-core": "^6.26.0",
