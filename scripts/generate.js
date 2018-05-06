@@ -3,7 +3,7 @@ const { sync: mkdirp } = require('mkdirp');
 const path = require('path');
 const rollup = require('rollup');
 const babel = require('rollup-plugin-babel');
-const meta = require('../mdi/meta.json');
+const meta = require('@mdi/svg/meta.json');
 
 const svgPathRegex = /\sd="(.*)"/;
 const startsWithNumberRegex = /^\d/;
@@ -117,7 +117,7 @@ function collectComponents(svgFilesPath) {
 
 async function generate(target, jsCb, tsCb, tsAllCb) {
   const basePath = path.resolve(__dirname, '..');
-  const svgFilesPath = path.resolve(basePath, 'mdi/svg');
+  const svgFilesPath = path.resolve(basePath, 'node_modules/@mdi/svg/svg');
   const buildPath = path.resolve(basePath, 'build');
   mkdirp(buildPath);
   const publishPath = path.resolve(basePath, 'publish-' + target);
