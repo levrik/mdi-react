@@ -1,5 +1,9 @@
 {
-  "extends": [
-    "config:base"
-  ]
+  "extends": ["config:base"],
+  "includePaths": ["package.json"],
+  "separatePatchReleases": true,
+  "prCreation": "not-pending",
+  "devDependencies": {
+    "enabled": false
+  }
 }
