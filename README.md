@@ -33,7 +33,7 @@ import { AlertIcon, AlertCircleIcon } from 'mdi-react';
 const MyComponent = () => {
   return (
     <div>
-      {/* The default color is #000 */}
+      {/* The default color is currentColor */}
       <AlertIcon color="#fff" />
       {/* The default size is 24 */}
       <AlertCircleIcon className="some-class" size={16} />
