@@ -8,4 +8,4 @@ content = content.replace('React/Preact', 'Preact/React');
 content = content.replace(/<!-- Preact intro -->(.|\r?\n)*<!-- Preact intro -->/g, 'Support for [React](https://reactjs.org/) is available via the `mdi-react` package.');
 content = content.replace('className', 'class');
 
-process.stdout.write(content);
+fs.writeFileSync(path.resolve(__dirname, '..', 'README-preact.md'), content);
