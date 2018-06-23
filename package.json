@@ -16,11 +16,12 @@
     "clean-react": "rimraf publish-react/**/*.js publish-react/**/*.d.ts",
     "clean-preact": "rimraf publish-preact/**/*.js publish-preact/**/*.d.ts",
     "clean": "yarn clean-react && yarn clean-preact",
+    "build-preact-readme": "node scripts/generate-preact-readme.js",
     "build-react": "yarn run clean-react && node scripts/generate-react.js && cpr README.md publish-react/README.md -o && cpr CHANGELOG.md publish-react/CHANGELOG.md -o && cpr LICENSE publish-react/LICENSE -o",
-    "build-preact": "yarn run clean-preact && node scripts/generate-preact.js && node scripts/generate-preact-readme.js > publish-preact/README.md && cpr CHANGELOG.md publish-preact/CHANGELOG.md -o && cpr LICENSE publish-preact/LICENSE -o"
+    "build-preact": "yarn run clean-preact && yarn run build-preact-readme && node scripts/generate-preact.js && cpr README-preact.md publish-preact/README.md -o && cpr CHANGELOG.md publish-preact/CHANGELOG.md -o && cpr LICENSE publish-preact/LICENSE -o"
   },
   "dependencies": {
-    "@mdi/svg": "2.3.54"
+    "@mdi/svg": "2.4.85"
   },
   "devDependencies": {
     "@types/node": "^9.6.6",
