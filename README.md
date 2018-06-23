@@ -42,6 +42,14 @@ const MyComponent = () => {
 };
 ```
 
+To change the color on hover you can just use your own class and plain CSS.
+
+```css
+.some-class:hover {
+  fill: red;
+}
+```
+
 You can also add default styling via the `mdi-icon` class.
 
 ```css
