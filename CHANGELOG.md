@@ -2,7 +2,7 @@
 
 This page only documents changes to the library itself, **not** the icons. Please refer to the [mdi history](https://materialdesignicons.com/history) for that.
 
-## Unreleased [![Material Design Icons version](https://img.shields.io/badge/mdi-v2.4.85-blue.svg?style=flat-square)](https://materialdesignicons.com)
+## 4.0.0 [![Material Design Icons version](https://img.shields.io/badge/mdi-v2.4.85-blue.svg?style=flat-square)](https://materialdesignicons.com)
 
 ### Breaking changes
 
