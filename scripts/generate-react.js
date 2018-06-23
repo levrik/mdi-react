@@ -2,7 +2,7 @@ const generate = require('./generate');
 
 generate('react', component => `import React from 'react';
 
-const ${component.name} = ({ color = '#000', size = 24, children, ...props }) => {
+const ${component.name} = ({ color = 'currentColor', size = 24, children, ...props }) => {
   const className = 'mdi-icon ' + (props.className || '');
 
   return (

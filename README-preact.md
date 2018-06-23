@@ -30,7 +30,7 @@ import { AlertIcon, AlertCircleIcon } from 'mdi-preact';
 const MyComponent = () => {
   return (
     <div>
-      {/* The default color is #000 */}
+      {/* The default color is the current text color (currentColor) */}
       <AlertIcon color="#fff" />
       {/* The default size is 24 */}
       <AlertCircleIcon class="some-class" size={16} />
@@ -51,8 +51,6 @@ You can also add default styling via the `mdi-icon` class.
 
 ```css
 .mdi-icon {
-  /* Set this to have the color match the current text color */
-  fill: currentColor;
   /* Set this to have the icon size match the current font size */
   width: 1em;
   height: 1em;
