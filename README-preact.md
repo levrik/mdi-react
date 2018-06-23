@@ -30,7 +30,7 @@ import { AlertIcon, AlertCircleIcon } from 'mdi-preact';
 const MyComponent = () => {
   return (
     <div>
-      {/* The default color is #000 */}
+      {/* The default color is the current text color (currentColor) */}
       <AlertIcon color="#fff" />
       {/* The default size is 24 */}
       <AlertCircleIcon class="some-class" size={16} />
