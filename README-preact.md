@@ -34,6 +34,8 @@ const MyComponent = () => {
       <AlertIcon color="#fff" />
       {/* The default size is 24 */}
       <AlertCircleIcon class="some-class" size={16} />
+      {/* This sets the icon size to the current font size */}
+      <AlertIcon size="1em" />
     </div>
   );
 };
@@ -51,8 +53,6 @@ You can also add default styling via the `mdi-icon` class.
 
 ```css
 .mdi-icon {
-  /* Set this to have the icon size match the current font size */
-  width: 1em;
-  height: 1em;
+  background-color: green;
 }
 ```
