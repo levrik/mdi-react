@@ -2,6 +2,12 @@
 
 This page only documents changes to the library itself, **not** the icons. Please refer to the [mdi history](https://materialdesignicons.com/history) for that.
 
+## Unreleased [![Material Design Icons version](https://img.shields.io/badge/mdi-v2.4.85-blue.svg?style=flat-square)](https://materialdesignicons.com)
+
+### Breaking changes
+
+- [#33](https://github.com/levrik/mdi-react/pull/33) Changed default color of icons to the current text color (`currentColor`).
+
 ## 3.4.0 [![Material Design Icons version](https://img.shields.io/badge/mdi-v2.4.85-blue.svg?style=flat-square)](https://materialdesignicons.com)
 
 _No changes_
