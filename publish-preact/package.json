@@ -16,7 +16,7 @@
     "url": "git+ssh://git@github.com/levrik/mdi-react.git"
   },
   "scripts": {
-    "prepublish": "cd .. && yarn build-preact"
+    "prepublishOnly": "cd .. && yarn build-preact"
   },
   "author": "Levin Rickert <me@levrik.io>",
   "license": "(MIT AND OFL-1.1)",
