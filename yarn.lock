@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@mdi/svg@2.6.95":
-  version "2.6.95"
-  resolved "https://registry.yarnpkg.com/@mdi/svg/-/svg-2.6.95.tgz#04e888a430098c8293209573932a6a47ead07d63"
+"@mdi/svg@2.7.94":
+  version "2.7.94"
+  resolved "https://registry.yarnpkg.com/@mdi/svg/-/svg-2.7.94.tgz#5f2b03c363b10f7e4cf8c8a5fdc81cbd838bf44b"
 
 "@types/estree@0.0.38":
   version "0.0.38"
