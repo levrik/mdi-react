@@ -24,8 +24,6 @@ For example the icons named `alert` and `alert-circle`:
 ```javascript
 import AlertIcon from 'mdi-preact/AlertIcon';
 import AlertCircleIcon from 'mdi-preact/AlertCircleIcon';
-// If your build tools support ES module syntax and tree-shaking (like webpack 2 and above)
-import { AlertIcon, AlertCircleIcon } from 'mdi-preact';
 
 const MyComponent = () => {
   return (

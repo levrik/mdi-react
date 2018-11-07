@@ -163,37 +163,10 @@ async function generate(target, jsCb, tsCb, tsAllCb) {
 
   console.log('Generating typings...');
   // create the global typings.d.ts
-  const typingsContent = tsAllCb(components);
+  const typingsContent = tsAllCb();
   fs.writeFileSync(path.resolve(distPath, 'typings.d.ts'), typingsContent);
 
-  console.log('Generating index...');
-  // create index.es.js and index.cjs.js
-  const indexFileContent = components
-    .map(component => `export { default as ${component.name} } from './${component.aliasFor || component.name}';`)
-    .join('\n');
-
-  const indexInputPath = path.resolve(buildPath, 'index.js');
-
-  fs.writeFileSync(indexInputPath, indexFileContent);
-
-  const bundle = await rollup.rollup({
-    input: indexInputPath,
-    ...getRollupInputConfig(target)
-  });
-
-  await Promise.all([
-    bundle.write({
-      file: path.resolve(distPath, 'index.cjs.js'),
-      format: 'cjs'
-    }),
-    bundle.write({
-      file: path.resolve(distPath, 'index.es.js'),
-      format: 'es'
-    })
-  ]);
-
   // clean up
-  fs.unlinkSync(indexInputPath);
   for (const pathToUnlink of pathsToUnlink) {
     fs.unlinkSync(pathToUnlink);
   }

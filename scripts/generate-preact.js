@@ -17,7 +17,7 @@ export default ${component.name};
 
 declare const ${component.name}: MdiReactIconComponentType;
 export default ${component.name};
-`, components => `import { FunctionalComponent } from 'preact';
+`, () => `import { FunctionalComponent } from 'preact';
 
 export interface MdiReactIconProps {
   color?: string;
@@ -28,6 +28,4 @@ export interface MdiReactIconProps {
   children?: never;
 }
 export type MdiReactIconComponentType = FunctionalComponent<MdiReactIconProps>;
-
-${components.map(component => `declare const ${component.name}: MdiReactIconComponentType;`).join('\n')}
 `).catch(err => console.error(err));
