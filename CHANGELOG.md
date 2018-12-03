@@ -2,6 +2,12 @@
 
 This page only documents changes to the library itself, **not** the icons. Please refer to the [mdi history](https://materialdesignicons.com/history) for that.
 
+## 5.1.0 [![Material Design Icons version](https://img.shields.io/badge/mdi-v3.2.89-blue.svg?style=flat-square)](https://materialdesignicons.com)
+
+### Fixes
+
+- [`d5bb1cf`](https://github.com/levrik/mdi-react/commit/d5bb1cfcb7856af6e60828265baed6ec58c527d8) Removed `main` and `module` from `package.json`. These files were removed in _5.0.0_.
+
 ## 5.0.0 [![Material Design Icons version](https://img.shields.io/badge/mdi-v3.0.39-blue.svg?style=flat-square)](https://materialdesignicons.com)
 
 ### Breaking changes
