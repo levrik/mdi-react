@@ -12,7 +12,7 @@ const ${component.name} = ({ color = 'currentColor', size = 24, children, ...pro
   );
 };
 
-export default ${component.name};
+export default React.memo ? React.memo(${component.name}) : ${component.name}
 `, component => `import { MdiReactIconComponentType } from './dist/typings';
 
 declare const ${component.name}: MdiReactIconComponentType;
