@@ -124,6 +124,9 @@ async function generate(target, jsCb, tsCb, tsAllCb) {
   mkdirp(publishPath);
   const distPath = path.resolve(publishPath, 'dist');
   mkdirp(distPath);
+  const indexFilePath = path.resolve(basePath, 'publish-' + target, 'index.js');
+
+  const indexFileStream = fs.createWriteStream(indexFilePath, {flags:'a'});
 
   console.log('Collecting components...');
   const components = collectComponents(svgFilesPath);
@@ -159,6 +162,9 @@ async function generate(target, jsCb, tsCb, tsAllCb) {
 
     const definitionContent = tsCb(component);
     fs.writeFileSync(path.join(publishPath, component.defFileName), definitionContent);
+    indexFileStream.write(
+      `export {default as ${component.name}} from './${component.name}';\n`
+    )
   }
 
   console.log('Generating typings...');
