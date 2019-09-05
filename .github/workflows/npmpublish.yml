@@ -1,0 +1,36 @@
+name: Node.js Package
+
+on:
+  push:
+    branches:
+      - master
+
+
+- name: GitHub Action for Yarn
+  
+
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - uses: Borales/actions-yarn@1.1.0
+      - run: yarn
+
+  publish-npm:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+      - uses: Borales/actions-yarn@1.1.0
+      - run: yarn publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
