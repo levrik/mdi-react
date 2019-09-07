@@ -18,6 +18,9 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
+      - run: node scripts/prepare-mdi-update.js
+      - run: git --version
+      - run: jq --version
   # publish-npm:
   #   needs: build
   #   steps:
