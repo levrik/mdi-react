@@ -2,10 +2,17 @@ const semver = require('semver');
 const fs = require('fs');
 const path = require('path');
 
-// TODO: get from arguments
-const mdiVersion = '3.7.95';
-const nextMdiVersion = '3.8.64';
-const pkgVersion = '5.5.0';
+const [, , mdiVersion, nextMdiVersion, pkgVersion] = process.argv;
+
+if (!mdiVersion || !nextMdiVersion || !pkgVersion) {
+  console.log('Missing arguments');
+  process.exit(1);
+}
+
+if (![mdiVersion, nextMdiVersion, pkgVersion].every(semver.valid)) {
+  console.log('Not all arguments are valid semver');
+  process.exit(1);
+}
 
 const nextPkgVersion = semver.inc(
   pkgVersion,
@@ -47,3 +54,23 @@ const nextReadmeContent = readmeContent
   );
 
 fs.writeFileSync(path.resolve(__dirname, '..', 'README.md'), nextReadmeContent);
+
+function updatePackageJson(pkg) {
+  const packageJsonContent = fs.readFileSync(
+    path.resolve(__dirname, '..', `publish-${pkg}`, 'package.json'),
+    'utf8'
+  );
+
+  const nextPackageJsonContent = packageJsonContent.replace(
+    `"version": "${pkgVersion}"`,
+    `"version": "${nextPkgVersion}"`
+  );
+
+  fs.writeFileSync(
+    path.resolve(__dirname, '..', `publish-${pkg}`, 'package.json'),
+    nextPackageJsonContent
+  );
+}
+
+updatePackageJson('react');
+updatePackageJson('preact');
