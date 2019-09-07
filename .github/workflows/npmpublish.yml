@@ -1,34 +1,39 @@
-name: Node.js Package
+name: Publish mdi update
 
-on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-     - master
+on: push
+
+# on:
+#   push:
+#     branches:
+#       - master
+#   pull_request:
+#     branches:
+#       - master
+
+runs-on: ubuntu-latest
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        package: [react, preact]
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - uses: Borales/actions-yarn@1.1.0
-      - run: yarn
-
-  publish-npm:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-          registry-url: https://registry.npmjs.org/
-      - uses: Borales/actions-yarn@1.1.0
-      - run: yarn publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+      - run: yarn install
+      - run: yarn build
+      - run: echo ${{ matrix.package }}
+  # publish-npm:
+  #   needs: build
+  #   steps:
+  #     - uses: actions/checkout@v1
+  #     - uses: actions/setup-node@v1
+  #       with:
+  #         node-version: 12
+  #         registry-url: https://registry.npmjs.org/
+  #     - uses: Borales/actions-yarn@1.1.0
+  #     - run: yarn publish
+  #       env:
+  #         NODE_AUTH_TOKEN: ${{secrets.npm_token}}
