@@ -10,10 +10,9 @@ on: push
 #     branches:
 #       - master
 
-runs-on: ubuntu-latest
-
 jobs:
   build:
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         package: [react, preact]
