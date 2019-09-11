@@ -28,5 +28,8 @@ const render = () => (
     <AccessPointNetworkIcon></AccessPointNetworkIcon>
     <AccessPointNetworkIcon size={16} />
     <AccessPointNetworkIcon color="#fff" size="16" class="some-class" className="some-class" />
+    <AccessPointNetworkIcon
+      size={16} style={{display: 'block', margin: 'auto'}}
+      onClick={() => {}} />
   </>
 );
