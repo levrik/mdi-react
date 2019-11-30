@@ -4,6 +4,10 @@ This page only documents changes to the library itself, **not** the icons. Pleas
 
 <!-- Changelog list -->
 
+## 6.4.0 [![Material Design Icons version](https://img.shields.io/badge/mdi-v4.6.95-blue.svg?style=flat-square)](https://materialdesignicons.com)
+
+- [`a81857d`](https://github.com/levrik/mdi-react/commit/a81857deb8e7291d93b7425d841217ffa669f4a0) [#50](https://github.com/levrik/mdi-react/pull/50) Add SVG element props to TS definitions 
+
 ## 6.3.0 [![Material Design Icons version](https://img.shields.io/badge/mdi-v4.6.95-blue.svg?style=flat-square)](https://materialdesignicons.com)
 
 _No changes_
