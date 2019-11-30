@@ -17,12 +17,15 @@ export default React.memo ? React.memo(${component.name}) : ${component.name};
 
 declare const ${component.name}: MdiReactIconComponentType;
 export default ${component.name};
-`, () => `import { ComponentType } from 'react';
+`, () => `import { ComponentType, SVGProps } from 'react';
 
-export interface MdiReactIconProps {
+type AllSVGProps = SVGProps<SVGSVGElement>
+
+type ReservedProps = 'color' | 'size' | 'width' | 'height' | 'fill' | 'viewBox'
+
+export interface MdiReactIconProps extends Pick<AllSVGProps, Exclude<keyof AllSVGProps, ReservedProps>> {
   color?: string;
   size?: number | string;
-  className?: string;
   // should not have any children
   children?: never;
 }
