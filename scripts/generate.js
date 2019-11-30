@@ -129,11 +129,11 @@ async function generate(target, jsCb, tsCb, tsAllCb) {
   const components = collectComponents(svgFilesPath);
   console.log('Generating components...');
   const pathsToUnlink = [];
-  for (const component of components) {
+  for (const [index, component] of components.entries()) {
     if (!component.aliasFor) {
-      console.log('Generating ' + component.name + '...');
+      console.log(`Generating ${component.name}... (${index + 1}/${components.length})`);
     } else {
-      console.log('Generating alias ' + component.name + '...');
+      console.log(`Generating alias ${component.name}... (${index + 1}/${components.length})`);
     }
 
     const fileContent = jsCb(component);
