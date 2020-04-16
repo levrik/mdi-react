@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@mdi/svg@5.0.45":
-  version "5.0.45"
-  resolved "https://registry.yarnpkg.com/@mdi/svg/-/svg-5.0.45.tgz#4544b114419effd5e1373bf1f07d567c27f44818"
-  integrity sha512-JAsxPV2Um/AxZluJxNnxqgrByQT3wj7f0V0YJI632qUwiU6EDmG1D43FMHlLS5oEPjYB4meiyF4/mPDXqfICSw==
+"@mdi/svg@5.1.45":
+  version "5.1.45"
+  resolved "https://registry.yarnpkg.com/@mdi/svg/-/svg-5.1.45.tgz#31b6df5547e8ec166bf80747143e0cfe9a4d4928"
+  integrity sha512-NJ1AmjJ454uRUm3QgNFNyW0aYoaZcYKqUS4yjlEMvnQi540/VPNOsXX46O33ZeYWsJzvfB4gJD+iMAx0y1sgrA==
 
 "@types/estree@0.0.38":
   version "0.0.38"
