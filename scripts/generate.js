@@ -10,7 +10,7 @@ const startsWithNumberRegex = /^\d/;
 
 function getRollupInputConfig(target) {
   return {
-    external: [target],
+    external: ['react', 'react-native', 'react-native-svg', 'preact'],
     plugins: [
       babel({
         presets: [
@@ -115,7 +115,7 @@ function collectComponents(svgFilesPath) {
   return [...icons, ...aliases];
 }
 
-async function generate(target, jsCb, tsCb, tsAllCb) {
+async function generate(target, babelPreset, jsCb, tsCb, tsAllCb) {
   const basePath = path.resolve(__dirname, '..');
   const svgFilesPath = path.resolve(basePath, 'node_modules/@mdi/svg/svg');
   const buildPath = path.resolve(basePath, 'build');
@@ -144,7 +144,7 @@ async function generate(target, jsCb, tsCb, tsAllCb) {
 
     const bundle = await rollup.rollup({
       input: inputPath,
-      ...getRollupInputConfig(target)
+      ...getRollupInputConfig(babelPreset)
     });
 
     await bundle.write({

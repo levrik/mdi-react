@@ -1,14 +1,15 @@
 const generate = require('./generate');
 
-generate('react', 'react', component => `import React from 'react';
+generate('react-native', 'react', component => `import React from 'react';
+import Svg, { Path } from 'react-native-svg';
 
 const ${component.name} = ({ color = 'currentColor', size = 24, children, ...props }) => {
   const className = 'mdi-icon ' + (props.className || '');
 
   return (
-    <svg {...props} className={className} width={size} height={size} fill={color} viewBox="0 0 24 24">
-      <path d="${component.svgPath}" />
-    </svg>
+    <Svg {...props} className={className} width={size} height={size} viewBox="0 0 24 24">
+      <Path d="${component.svgPath}" fill={color} />
+    </Svg>
   );
 };
 

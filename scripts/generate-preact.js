@@ -1,6 +1,6 @@
 const generate = require('./generate');
 
-generate('preact', component => `import { h } from 'preact';
+generate('preact', 'preact', component => `import { h } from 'preact';
 
 const ${component.name} = ({ color = 'currentColor', size = 24, children, ...props }) => {
   const className = 'mdi-icon ' + (props.class || props.className || '');

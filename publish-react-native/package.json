@@ -1,0 +1,31 @@
+{
+  "name": "mdi-react-native",
+  "version": "7.3.0",
+  "description": "Material Design Icons for React Native",
+  "keywords": [
+    "mdi",
+    "react",
+    "react-native",
+    "material",
+    "design",
+    "icons"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/levrik/mdi-react.git"
+  },
+  "scripts": {
+    "prepublishOnly": "cd .. && yarn build-react-native"
+  },
+  "author": "Levin Rickert <me@levrik.io>",
+  "license": "(MIT AND OFL-1.1)",
+  "bugs": {
+    "url": "https://github.com/levrik/mdi-react/issues"
+  },
+  "homepage": "https://github.com/levrik/mdi-react",
+  "peerDependencies": {
+    "react": ">=0.14.0",
+    "react-native-svg": ">= 6.0.0"
+  },
+  "typings": "./dist/typings.d.ts"
+}
