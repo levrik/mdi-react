@@ -1,7 +1,7 @@
-# mdi-react [![npm package](https://img.shields.io/npm/v/mdi-react.svg?style=flat-square)](https://npmjs.org/package/mdi-react) [![Material Design Icons version](https://img.shields.io/badge/mdi-v6.5.95-blue.svg?style=flat-square)](https://materialdesignicons.com) [![build status](https://img.shields.io/travis/levrik/mdi-react/master.svg?style=flat-square)](https://travis-ci.org/levrik/mdi-react)
+# mdi-react [![npm package](https://img.shields.io/npm/v/mdi-react.svg?style=flat-square)](https://npmjs.org/package/mdi-react) [![Material Design Icons version](https://img.shields.io/badge/mdi-v6.6.95-blue.svg?style=flat-square)](https://materialdesignicons.com) [![build status](https://img.shields.io/travis/levrik/mdi-react/master.svg?style=flat-square)](https://travis-ci.org/levrik/mdi-react)
 [Material Design Icons](https://materialdesignicons.com) for React/Preact packaged as single components
 
-**New v8.2.0 released: See [CHANGELOG.md](./CHANGELOG.md)**
+**New v8.3.0 released: See [CHANGELOG.md](./CHANGELOG.md)**
 
 ## Installation
 
