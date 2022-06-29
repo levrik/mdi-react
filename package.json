@@ -21,7 +21,7 @@
     "build-preact": "yarn run clean-preact && yarn run generate-preact-readme && node scripts/generate-preact.js && cpr README-preact.md publish-preact/README.md -o && cpr CHANGELOG.md publish-preact/CHANGELOG.md -o && cpr LICENSE publish-preact/LICENSE -o"
   },
   "dependencies": {
-    "@mdi/svg": "6.7.96"
+    "@mdi/svg": "6.8.96"
   },
   "devDependencies": {
     "@types/node": "^9.6.6",
