@@ -16,7 +16,7 @@ export default ${component.name};
 `, component => `import { MdiReactIconComponentType } from './dist/typings';
 
 declare const ${component.name}: MdiReactIconComponentType;
-export default ${component.name};
+export = ${component.name};
 `, () => `import { FunctionalComponent } from 'preact';
 
 // TODO(pcorpet): Extends SVGProps when it exists in Preact.

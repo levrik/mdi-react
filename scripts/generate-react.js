@@ -16,7 +16,7 @@ export default React.memo ? React.memo(${component.name}) : ${component.name};
 `, component => `import { MdiReactIconComponentType } from './dist/typings';
 
 declare const ${component.name}: MdiReactIconComponentType;
-export default ${component.name};
+export = ${component.name};
 `, () => `import { ComponentType, SVGProps } from 'react';
 
 type AllSVGProps = SVGProps<SVGSVGElement>
