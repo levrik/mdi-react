@@ -4,6 +4,12 @@ This page only documents changes to the library itself, **not** the icons. Pleas
 
 <!-- Changelog list -->
 
+## 9.1.0 [![Material Design Icons version](https://img.shields.io/badge/mdi-v7.1.96-blue.svg?style=flat-square)](https://materialdesignicons.com)
+
+### Changes
+
+- [`ea0580f`](https://github.com/levrik/mdi-react/commit/ea0580f795f027cb77a0bb8b45db95ed5191738a) [#103](https://github.com/levrik/mdi-react/pull/103) Support module modes `node16` and `nodenext` in TypeScript
+
 ## 9.0.0 [![Material Design Icons version](https://img.shields.io/badge/mdi-v7.0.96-blue.svg?style=flat-square)](https://materialdesignicons.com)
 
 _No changes_
