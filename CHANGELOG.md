@@ -4,6 +4,10 @@ This page only documents changes to the library itself, **not** the icons. Pleas
 
 <!-- Changelog list -->
 
+## 9.3.0 [![Material Design Icons version](https://img.shields.io/badge/mdi-v7.3.67-blue.svg?style=flat-square)](https://materialdesignicons.com)
+
+_No changes_
+
 ## 9.2.0 [![Material Design Icons version](https://img.shields.io/badge/mdi-v7.2.96-blue.svg?style=flat-square)](https://materialdesignicons.com)
 
 _No changes_
