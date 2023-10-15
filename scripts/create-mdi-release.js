@@ -74,3 +74,4 @@ function updatePackageJson(pkg) {
 
 updatePackageJson('react');
 updatePackageJson('preact');
+updatePackageJson('react-native');
